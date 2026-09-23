@@ -10,9 +10,9 @@ const t = ui.en;
 
 <header>
   <h1>{name}</h1>
-  <p>{role}</p>
-  <p>{summary}</p>
-  <p><a href="#contact">{t.getInTouch}</a></p>
+  <p class="role">{role}</p>
+  <p class="summary">{summary}</p>
+  <p class="actions"><a href="#contact">{t.getInTouch}</a></p>
   <nav>
     <ul>
       {
@@ -25,3 +25,38 @@ const t = ui.en;
     </ul>
   </nav>
 </header>
+
+<style>
+  h1 {
+    font-size: var(--step-5);
+    line-height: var(--leading-tight);
+  }
+
+  .role {
+    margin-block-start: var(--space-xs);
+    font-size: var(--step-1);
+    line-height: var(--leading-snug);
+  }
+
+  .summary {
+    margin-block-start: var(--space-2xs);
+    color: var(--text-muted);
+  }
+
+  .actions {
+    margin-block-start: var(--space-m);
+  }
+
+  nav {
+    margin-block-start: var(--space-l);
+    font-size: var(--step--1);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-s);
+    padding: 0;
+    list-style: none;
+  }
+</style>
