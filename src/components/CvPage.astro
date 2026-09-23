@@ -1,0 +1,173 @@
+---
+import type { LocalizedCv } from "../i18n/cv";
+import { getLocale, ui } from "../i18n/ui";
+import Base from "../layouts/Base.astro";
+import DateRange from "./DateRange.astro";
+import ExperienceItem from "./ExperienceItem.astro";
+import Header from "./Header.astro";
+import Localized from "./Localized.astro";
+import Section from "./Section.astro";
+
+interface Props {
+  cv: LocalizedCv;
+}
+
+const { cv } = Astro.props;
+const t = ui[getLocale(Astro.currentLocale)];
+---
+
+<Base title={cv.name}>
+  <a class="skip-link" href="#main">{t.skipLink}</a>
+  <Header name={cv.name} role={cv.role} summary={cv.summary} />
+  <main id="main">
+    <Section id="about">
+      <p><Localized text={cv.about} /></p>
+    </Section>
+
+    <Section id="experience">
+      <ol class="entries">
+        {cv.experience.map((item) => <ExperienceItem {...item} />)}
+      </ol>
+    </Section>
+
+    <Section id="work">
+      <ul class="entries">
+        {
+          cv.work.map(({ name, description, role, url }) => (
+            <li>
+              <p class="title">
+                <a href={url}>{name}</a>
+              </p>
+              <p>
+                <Localized text={description} />
+              </p>
+              <p class="meta">
+                <Localized text={role} />
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id="skills">
+      <dl>
+        {
+          cv.skills.map(({ name, items }) => (
+            <>
+              <dt>
+                <Localized text={name} />
+              </dt>
+              <dd>
+                <ul class="skills">
+                  {items.map((item) => (
+                    <li><Localized text={item} /></li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          ))
+        }
+      </dl>
+    </Section>
+
+    <Section id="education">
+      <ol class="entries">
+        {
+          cv.education.map(({ title, institution, start, end }) => (
+            <li>
+              <p>
+                <span class="title"><Localized text={title} /></span>,{" "}
+                <Localized text={institution} />
+              </p>
+              <p class="meta">
+                <DateRange start={start} end={end} />
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </Section>
+
+    <Section id="languages">
+      <dl>
+        {
+          cv.languages.map(({ name, level }) => (
+            <>
+              <dt>
+                <Localized text={name} />
+              </dt>
+              <dd>
+                <Localized text={level} />
+              </dd>
+            </>
+          ))
+        }
+      </dl>
+    </Section>
+
+    <Section id="contact">
+      <p><Localized text={cv.contact.intro} /></p>
+      <address>
+        <ul class="contact">
+          <li>
+            <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a>
+          </li>
+          <li><a href={cv.contact.linkedin}>LinkedIn</a></li>
+          <li><a href={cv.contact.github}>GitHub</a></li>
+          <li>
+            <a href={cv.contact.business.url}>{cv.contact.business.name}</a>
+          </li>
+        </ul>
+      </address>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .skip-link {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: var(--gutter);
+    padding: var(--space-2xs) var(--space-xs);
+    background: var(--bg);
+    translate: 0 -100%;
+  }
+
+  .skip-link:focus {
+    translate: none;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd + dt {
+    margin-block-start: var(--space-s);
+  }
+
+  .skills {
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills li {
+    display: inline;
+  }
+
+  .skills li:not(:last-child)::after {
+    content: ", ";
+  }
+
+  address {
+    margin-block-start: var(--space-s);
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-m);
+    padding: 0;
+    list-style: none;
+  }
+</style>
