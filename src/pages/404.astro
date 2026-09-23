@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Page not found">
+  <meta name="robots" content="noindex" slot="head" />
+  <main>
+    <h1>Page not found</h1>
+    <p>There's no page at this address.</p>
+    <ul>
+      <li><a href="/" lang="en">CV in English</a></li>
+      <li><a href="/de/" lang="de">Lebenslauf auf Deutsch</a></li>
+      <li><a href="/pl/" lang="pl">CV po polsku</a></li>
+    </ul>
+  </main>
+</Base>
+
+<style>
+  h1 {
+    font-size: var(--step-5);
+    line-height: var(--leading-tight);
+  }
+
+  p {
+    margin-block-start: var(--space-s);
+  }
+
+  ul {
+    margin-block-start: var(--space-m);
+    padding: 0;
+    list-style: none;
+  }
+
+  li + li {
+    margin-block-start: var(--space-2xs);
+  }
+</style>

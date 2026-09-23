@@ -46,6 +46,29 @@
   unicode-range: U+0100-0130, U+0132-0151, U+0154-017F;
 }
 
+/*
+ * Local fallbacks resized to Inter's and Newsreader's metrics, so text keeps
+ * its size and line breaks when the web fonts swap in. The values come from
+ * each font's typographic ascent, descent and average width of Latin text.
+ */
+@font-face {
+  font-family: "Inter fallback";
+  src: local("Arial");
+  size-adjust: 107.58%;
+  ascent-override: 90.05%;
+  descent-override: 22.42%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Newsreader fallback";
+  src: local("Georgia");
+  size-adjust: 92.24%;
+  ascent-override: 79.68%;
+  descent-override: 28.73%;
+  line-gap-override: 0%;
+}
+
 :root {
   color-scheme: light dark;
 
@@ -55,8 +78,8 @@
   --rule: #e4e3dd;
   --accent: #a8431c;
 
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Newsreader", ui-serif, Georgia, serif;
+  --font-body: "Inter", "Inter fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", "Newsreader fallback", ui-serif, Georgia, serif;
 
   /* Fluid modular scale: ratio 1.2 on a 16px base at 320px wide, rising to
      ratio 1.25 on an 18px base at 1440px wide. */

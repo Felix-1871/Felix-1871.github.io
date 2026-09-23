@@ -12,12 +12,12 @@ npx playwright install chromium --only-shell
 npm run dev
 ```
 
-The Playwright step downloads the headless Chromium that the build uses to print the PDFs.
+The Playwright step downloads the headless Chromium that the build uses for the PDFs and Open Graph images.
 
 ## Commands
 
 - `npm run dev`: local dev server at http://localhost:4321
-- `npm run build`: build the site into `dist/` and print a PDF per language into `dist/cv/`
+- `npm run build`: build the site into `dist/`, print a PDF per language into `dist/cv/` and render the Open Graph images into `dist/og/`
 - `npm run preview`: serve the built site
 - `npx astro check`: type and template check
 - `npm run format`: format with Prettier
