@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ui } from "../i18n/ui";
+
+type Props = Pick<CollectionEntry<"cv">["data"], "name" | "role" | "summary">;
+
+const { name, role, summary } = Astro.props;
+const t = ui.en;
+---
+
+<header>
+  <h1>{name}</h1>
+  <p>{role}</p>
+  <p>{summary}</p>
+  <p><a href="#contact">{t.getInTouch}</a></p>
+  <nav>
+    <ul>
+      {
+        Object.entries(t.sections).map(([id, heading]) => (
+          <li>
+            <a href={`#${id}`}>{heading}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

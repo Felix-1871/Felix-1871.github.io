@@ -1,0 +1,71 @@
+# English CV. The schema is in src/content.config.ts, and the build fails if
+# anything here doesn't match it.
+# Dates are "YYYY" or "YYYY-MM". Every 1900 date is a placeholder.
+
+name: "TODO: full name"
+role: "TODO: current role"
+summary: "TODO: one-line summary of current role"
+about: "TODO: 2–3 sentences on what I do and for whom, written for both employers and clients"
+
+# Newest first. Leave out `end` for a current role. 2–4 achievements each.
+experience:
+  - title: "TODO: job title"
+    organisation: "TODO: organisation"
+    location: "TODO: city, or remote"
+    start: "1900-01" # TODO: real start date
+    achievements:
+      - "TODO: concrete achievement"
+      - "TODO: concrete achievement"
+  - title: "TODO: job title"
+    organisation: "TODO: organisation"
+    location: "TODO: city, or remote"
+    start: "1900-01" # TODO: real start date
+    end: "1900-01" # TODO: real end date
+    achievements:
+      - "TODO: concrete achievement"
+      - "TODO: concrete achievement"
+
+work:
+  - name: "TODO: project name"
+    description: "TODO: one-line description"
+    role: "TODO: my role on the project"
+    url: "https://example.com/TODO-project-link"
+  - name: "TODO: project name"
+    description: "TODO: one-line description"
+    role: "TODO: my role on the project"
+    url: "https://example.com/TODO-project-link"
+
+skills:
+  - name: "TODO: skill group, for example design"
+    items:
+      - "TODO: skill"
+      - "TODO: skill"
+  - name: "TODO: skill group, for example development"
+    items:
+      - "TODO: skill"
+      - "TODO: skill"
+
+# Newest first. Leave out `start` for a certification with a single date.
+education:
+  - title: "TODO: degree"
+    institution: "TODO: university"
+    start: "1900" # TODO: real start year
+    end: "1900" # TODO: real end year
+  - title: "TODO: certification"
+    institution: "TODO: issuing organisation"
+    end: "1900-01" # TODO: real date
+
+languages:
+  - name: "TODO: language"
+    level: "TODO: level, for example native or C1"
+  - name: "TODO: language"
+    level: "TODO: level, for example native or C1"
+
+contact:
+  intro: "TODO: one line saying I'm open to job offers and project enquiries"
+  email: "todo@example.com"
+  linkedin: "https://example.com/TODO-linkedin-profile"
+  github: "https://example.com/TODO-github-profile"
+  business:
+    name: "TODO: business name"
+    url: "https://example.com/TODO-business-site"

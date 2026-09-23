@@ -1,0 +1,30 @@
+---
+import { ui } from "../i18n/ui";
+
+interface Props {
+  start?: string;
+  end?: string;
+}
+
+const { start, end } = Astro.props;
+
+const monthYear = new Intl.DateTimeFormat("en", {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+function label(date: string) {
+  const [year, month] = date.split("-").map(Number);
+  return month ? monthYear.format(Date.UTC(year, month - 1)) : String(year);
+}
+---
+
+{
+  start && (
+    <>
+      <time datetime={start}>{label(start)}</time> –{" "}
+    </>
+  )
+}
+{end ? <time datetime={end}>{label(end)}</time> : ui.en.present}
