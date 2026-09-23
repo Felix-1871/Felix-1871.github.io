@@ -1,7 +1,6 @@
 ---
-import { getAbsoluteLocaleUrl } from "astro:i18n";
 import "../styles/global.css";
-import { getLocale, locales } from "../i18n/ui";
+import { getLocale } from "../i18n/ui";
 
 interface Props {
   title: string;
@@ -17,16 +16,9 @@ const locale = getLocale(Astro.currentLocale);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    {
-      locales.map((code) => (
-        <link
-          rel="alternate"
-          hreflang={code}
-          href={getAbsoluteLocaleUrl(code)}
-        />
-      ))
-    }
-    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl("en")} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <slot name="head" />
     <link
       rel="preload"
       href="/fonts/inter-latin.woff2"

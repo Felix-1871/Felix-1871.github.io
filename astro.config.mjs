@@ -1,10 +1,10 @@
 // @ts-check
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // Canonical URLs, hreflang and the sitemap are built from this, so it must
-  // change to the custom domain once that is set up.
-  site: "https://felix-1871.github.io",
+  // Canonical URLs, hreflang, Open Graph and the sitemap are built from this.
+  site: "https://felix1871.moe",
   output: "static",
   i18n: {
     defaultLocale: "en",
@@ -13,4 +13,12 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", de: "de", pl: "pl" },
+      },
+    }),
+  ],
 });
