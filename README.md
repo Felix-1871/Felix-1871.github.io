@@ -20,3 +20,7 @@ npm run dev
 - `npm run format`: format with Prettier
 
 Every push to `main` builds and deploys the site through `.github/workflows/deploy.yml`.
+
+## Editing the CV
+
+All CV content is in `src/content/cv/en.yaml`. If something doesn't match the schema in `src/content.config.ts`, the build fails and names the field.
