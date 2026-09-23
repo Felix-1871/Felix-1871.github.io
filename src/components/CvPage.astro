@@ -6,6 +6,7 @@ import DateRange from "./DateRange.astro";
 import ExperienceItem from "./ExperienceItem.astro";
 import Header from "./Header.astro";
 import Localized from "./Localized.astro";
+import Meta from "./Meta.astro";
 import Section from "./Section.astro";
 
 interface Props {
@@ -16,7 +17,8 @@ const { cv } = Astro.props;
 const t = ui[getLocale(Astro.currentLocale)];
 ---
 
-<Base title={cv.name}>
+<Base title={`${cv.name} – ${cv.role.text}`}>
+  <Meta cv={cv} slot="head" />
   <a class="skip-link" href="#main">{t.skipLink}</a>
   <Header name={cv.name} role={cv.role} summary={cv.summary} />
   <main id="main">

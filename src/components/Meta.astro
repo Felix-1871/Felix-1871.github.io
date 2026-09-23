@@ -1,0 +1,64 @@
+---
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+import type { LocalizedCv } from "../i18n/cv";
+import { getLocale, locales } from "../i18n/ui";
+
+interface Props {
+  cv: LocalizedCv;
+}
+
+const { cv } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const url = getAbsoluteLocaleUrl(locale);
+const image = new URL(`/og/og-${locale}.png`, Astro.site).href;
+
+const ogLocales = { en: "en_GB", de: "de_DE", pl: "pl_PL" };
+
+const currentJob = cv.experience.find((job) => !job.end);
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: cv.name,
+  jobTitle: cv.role.text,
+  description: cv.summary.text,
+  url,
+  email: `mailto:${cv.contact.email}`,
+  sameAs: [cv.contact.linkedin, cv.contact.github, cv.contact.business.url],
+  knowsLanguage: cv.languages.map((language) => language.name.text),
+  worksFor: currentJob && {
+    "@type": "Organization",
+    name: currentJob.organisation,
+  },
+};
+// Escaped so no value can close the script element early.
+const jsonLd = JSON.stringify(person).replaceAll("<", "\\u003c");
+---
+
+<meta name="description" content={cv.summary.text} />
+<link rel="canonical" href={url} />
+{
+  locales.map((code) => (
+    <link rel="alternate" hreflang={code} href={getAbsoluteLocaleUrl(code)} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl("en")} />
+
+<meta property="og:type" content="profile" />
+<meta property="og:title" content={cv.name} />
+<meta property="og:description" content={cv.summary.text} />
+<meta property="og:url" content={url} />
+<meta property="og:locale" content={ogLocales[locale]} />
+{
+  locales
+    .filter((code) => code !== locale)
+    .map((code) => (
+      <meta property="og:locale:alternate" content={ogLocales[code]} />
+    ))
+}
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${cv.name}, ${cv.role.text}`} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="application/ld+json" set:html={jsonLd} />
