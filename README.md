@@ -8,13 +8,16 @@ You need Node 22.12 or later.
 
 ```sh
 npm install
+npx playwright install chromium --only-shell
 npm run dev
 ```
+
+The Playwright step downloads the headless Chromium that the build uses to print the PDFs.
 
 ## Commands
 
 - `npm run dev`: local dev server at http://localhost:4321
-- `npm run build`: build the site into `dist/`
+- `npm run build`: build the site into `dist/` and print a PDF per language into `dist/cv/`
 - `npm run preview`: serve the built site
 - `npx astro check`: type and template check
 - `npm run format`: format with Prettier

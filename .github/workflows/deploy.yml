@@ -24,6 +24,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # The build prints each language's page to PDF in headless Chromium.
+      - run: npx playwright install --with-deps --only-shell chromium
       - run: npx astro check
       - run: npm run build
       - if: github.ref == 'refs/heads/main'
