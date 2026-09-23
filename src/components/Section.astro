@@ -1,15 +1,16 @@
 ---
-import { ui } from "../i18n/ui";
+import { getLocale, ui, type SectionId } from "../i18n/ui";
 
 interface Props {
-  id: keyof typeof ui.en.sections;
+  id: SectionId;
 }
 
 const { id } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 ---
 
 <section id={id}>
-  <h2>{ui.en.sections[id]}</h2>
+  <h2>{ui[locale].sections[id]}</h2>
   <slot />
 </section>
 

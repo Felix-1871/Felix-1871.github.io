@@ -1,0 +1,11 @@
+---
+import type { Text } from "../i18n/cv";
+
+interface Props {
+  text: Text;
+}
+
+const { text } = Astro.props;
+---
+
+{text.lang ? <span lang={text.lang}>{text.text}</span> : text.text}

@@ -1,0 +1,8 @@
+---
+import CvPage from "../components/CvPage.astro";
+import { loadCv } from "../i18n/cv";
+
+const cv = await loadCv("en");
+---
+
+<CvPage cv={cv} />

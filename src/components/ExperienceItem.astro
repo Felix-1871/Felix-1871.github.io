@@ -1,17 +1,28 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { LocalizedCv } from "../i18n/cv";
 import DateRange from "./DateRange.astro";
+import Localized from "./Localized.astro";
 
-type Props = CollectionEntry<"cv">["data"]["experience"][number];
+type Props = LocalizedCv["experience"][number];
 
 const { title, organisation, location, start, end, achievements } = Astro.props;
 ---
 
 <li>
-  <p><span class="title">{title}</span>, {organisation}</p>
-  <p class="meta"><DateRange start={start} end={end} />, {location}</p>
+  <p>
+    <span class="title"><Localized text={title} /></span>, {organisation}
+  </p>
+  <p class="meta">
+    <DateRange start={start} end={end} />, <Localized text={location} />
+  </p>
   <ul>
-    {achievements.map((achievement) => <li>{achievement}</li>)}
+    {
+      achievements.map((achievement) => (
+        <li>
+          <Localized text={achievement} />
+        </li>
+      ))
+    }
   </ul>
 </li>
 

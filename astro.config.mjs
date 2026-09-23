@@ -6,4 +6,11 @@ export default defineConfig({
   // change to the custom domain once that is set up.
   site: "https://felix-1871.github.io",
   output: "static",
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "de", "pl"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

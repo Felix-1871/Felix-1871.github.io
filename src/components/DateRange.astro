@@ -1,5 +1,5 @@
 ---
-import { ui } from "../i18n/ui";
+import { getLocale, ui } from "../i18n/ui";
 
 interface Props {
   start?: string;
@@ -7,8 +7,9 @@ interface Props {
 }
 
 const { start, end } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
 
-const monthYear = new Intl.DateTimeFormat("en", {
+const monthYear = new Intl.DateTimeFormat(locale, {
   month: "short",
   year: "numeric",
   timeZone: "UTC",
@@ -27,4 +28,4 @@ function label(date: string) {
     </>
   )
 }
-{end ? <time datetime={end}>{label(end)}</time> : ui.en.present}
+{end ? <time datetime={end}>{label(end)}</time> : ui[locale].present}

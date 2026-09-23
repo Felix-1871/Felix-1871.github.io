@@ -1,18 +1,19 @@
 ---
-import { getEntry } from "astro:content";
+import type { LocalizedCv } from "../i18n/cv";
+import { getLocale, ui } from "../i18n/ui";
 import Base from "../layouts/Base.astro";
-import DateRange from "../components/DateRange.astro";
-import ExperienceItem from "../components/ExperienceItem.astro";
-import Header from "../components/Header.astro";
-import Section from "../components/Section.astro";
-import { ui } from "../i18n/ui";
+import DateRange from "./DateRange.astro";
+import ExperienceItem from "./ExperienceItem.astro";
+import Header from "./Header.astro";
+import Localized from "./Localized.astro";
+import Section from "./Section.astro";
 
-const entry = await getEntry("cv", "en");
-if (!entry) {
-  throw new Error("No English CV found. Add src/content/cv/en.yaml.");
+interface Props {
+  cv: LocalizedCv;
 }
-const cv = entry.data;
-const t = ui.en;
+
+const { cv } = Astro.props;
+const t = ui[getLocale(Astro.currentLocale)];
 ---
 
 <Base title={cv.name}>
@@ -20,7 +21,7 @@ const t = ui.en;
   <Header name={cv.name} role={cv.role} summary={cv.summary} />
   <main id="main">
     <Section id="about">
-      <p>{cv.about}</p>
+      <p><Localized text={cv.about} /></p>
     </Section>
 
     <Section id="experience">
@@ -37,8 +38,12 @@ const t = ui.en;
               <p class="title">
                 <a href={url}>{name}</a>
               </p>
-              <p>{description}</p>
-              <p class="meta">{role}</p>
+              <p>
+                <Localized text={description} />
+              </p>
+              <p class="meta">
+                <Localized text={role} />
+              </p>
             </li>
           ))
         }
@@ -50,11 +55,13 @@ const t = ui.en;
         {
           cv.skills.map(({ name, items }) => (
             <>
-              <dt>{name}</dt>
+              <dt>
+                <Localized text={name} />
+              </dt>
               <dd>
                 <ul class="skills">
                   {items.map((item) => (
-                    <li>{item}</li>
+                    <li><Localized text={item} /></li>
                   ))}
                 </ul>
               </dd>
@@ -70,7 +77,8 @@ const t = ui.en;
           cv.education.map(({ title, institution, start, end }) => (
             <li>
               <p>
-                <span class="title">{title}</span>, {institution}
+                <span class="title"><Localized text={title} /></span>,{" "}
+                <Localized text={institution} />
               </p>
               <p class="meta">
                 <DateRange start={start} end={end} />
@@ -86,8 +94,12 @@ const t = ui.en;
         {
           cv.languages.map(({ name, level }) => (
             <>
-              <dt>{name}</dt>
-              <dd>{level}</dd>
+              <dt>
+                <Localized text={name} />
+              </dt>
+              <dd>
+                <Localized text={level} />
+              </dd>
             </>
           ))
         }
@@ -95,7 +107,7 @@ const t = ui.en;
     </Section>
 
     <Section id="contact">
-      <p>{cv.contact.intro}</p>
+      <p><Localized text={cv.contact.intro} /></p>
       <address>
         <ul class="contact">
           <li>

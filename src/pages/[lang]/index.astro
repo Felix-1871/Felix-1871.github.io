@@ -1,0 +1,22 @@
+---
+import type { InferGetStaticPropsType } from "astro";
+import CvPage from "../../components/CvPage.astro";
+import { loadCv } from "../../i18n/cv";
+import { locales } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  const translated = locales.filter((locale) => locale !== "en");
+  return Promise.all(
+    translated.map(async (lang) => ({
+      params: { lang },
+      props: { cv: await loadCv(lang) },
+    })),
+  );
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { cv } = Astro.props;
+---
+
+<CvPage cv={cv} />
