@@ -138,6 +138,16 @@ const t = ui[getLocale(Astro.currentLocale)];
     translate: none;
   }
 
+  @media print {
+    .skip-link {
+      display: none;
+    }
+
+    .contact {
+      flex-direction: column;
+    }
+  }
+
   dt {
     font-weight: 600;
   }

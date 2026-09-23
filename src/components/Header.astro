@@ -31,7 +31,10 @@ const t = ui[locale];
   <h1>{name}</h1>
   <p class="role"><Localized text={role} /></p>
   <p class="summary"><Localized text={summary} /></p>
-  <p class="actions"><a href="#contact">{t.getInTouch}</a></p>
+  <p class="actions">
+    <a href="#contact">{t.getInTouch}</a>
+    <a href={`/cv/cv-${locale}.pdf`} download>{t.downloadCv}</a>
+  </p>
   <nav>
     <ul>
       {
@@ -81,10 +84,21 @@ const t = ui[locale];
   }
 
   .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-m);
     margin-block-start: var(--space-m);
   }
 
   nav {
     margin-block-start: var(--space-l);
+  }
+
+  @media print {
+    .languages,
+    .actions,
+    nav {
+      display: none;
+    }
   }
 </style>

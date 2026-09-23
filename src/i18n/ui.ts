@@ -20,6 +20,7 @@ export const languageNames: Record<Locale, string> = {
 const en = {
   skipLink: "Skip to content",
   getInTouch: "Get in touch",
+  downloadCv: "Download CV (PDF)",
   present: "present",
   sections: {
     about: "About",
@@ -39,6 +40,7 @@ export const ui: Record<Locale, typeof en> = {
   de: {
     skipLink: "Zum Inhalt springen",
     getInTouch: "Kontakt aufnehmen",
+    downloadCv: "Lebenslauf herunterladen (PDF)",
     present: "heute",
     sections: {
       about: "Über mich",
@@ -53,6 +55,7 @@ export const ui: Record<Locale, typeof en> = {
   pl: {
     skipLink: "Przejdź do treści",
     getInTouch: "Skontaktuj się ze mną",
+    downloadCv: "Pobierz CV (PDF)",
     present: "obecnie",
     sections: {
       about: "O mnie",
