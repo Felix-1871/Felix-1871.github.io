@@ -1,0 +1,10 @@
+# German CV. Only text that changes between languages goes here, in the same
+# shape as en.yaml. Names, dates, links and the email address always come from
+# en.yaml. Anything left out falls back to English, and the build lists it.
+
+role: "TODO: aktuelle Position"
+summary: "TODO: Zusammenfassung der aktuellen Position in einem Satz"
+about: "TODO: 2–3 Sätze dazu, was ich mache und für wen, für Arbeitgeber und Kunden gleichermaßen"
+
+contact:
+  intro: "TODO: ein Satz dazu, dass ich offen für Jobangebote und Projektanfragen bin"

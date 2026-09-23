@@ -1,0 +1,10 @@
+# Polish CV. Only text that changes between languages goes here, in the same
+# shape as en.yaml. Names, dates, links and the email address always come from
+# en.yaml. Anything left out falls back to English, and the build lists it.
+
+role: "TODO: obecne stanowisko"
+summary: "TODO: jednozdaniowe podsumowanie obecnego stanowiska"
+about: "TODO: 2–3 zdania o tym, czym się zajmuję i dla kogo, zarówno dla pracodawców, jak i dla klientów"
+
+contact:
+  intro: "TODO: jedno zdanie o tym, że przyjmuję oferty pracy i zapytania o projekty"

@@ -24,3 +24,5 @@ Every push to `main` builds and deploys the site through `.github/workflows/depl
 ## Editing the CV
 
 All CV content is in `src/content/cv/en.yaml`. If something doesn't match the schema in `src/content.config.ts`, the build fails and names the field.
+
+`de.yaml` and `pl.yaml` in the same folder hold the German and Polish text. They only contain text that changes between languages; names, dates, links and email always come from `en.yaml`. Any text left out falls back to English, and the build prints a warning listing each untranslated field.
