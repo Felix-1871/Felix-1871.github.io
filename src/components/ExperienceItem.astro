@@ -8,9 +8,25 @@ const { title, organisation, location, start, end, achievements } = Astro.props;
 ---
 
 <li>
-  <p>{title}, {organisation}</p>
-  <p><DateRange start={start} end={end} />, {location}</p>
+  <p><span class="title">{title}</span>, {organisation}</p>
+  <p class="meta"><DateRange start={start} end={end} />, {location}</p>
   <ul>
     {achievements.map((achievement) => <li>{achievement}</li>)}
   </ul>
 </li>
+
+<style>
+  ul {
+    margin-block-start: var(--space-xs);
+    padding-inline-start: var(--space-m);
+    list-style-type: disc;
+  }
+
+  ul li + li {
+    margin-block-start: var(--space-3xs);
+  }
+
+  ul li::marker {
+    color: var(--text-muted);
+  }
+</style>

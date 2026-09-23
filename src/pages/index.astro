@@ -16,7 +16,7 @@ const t = ui.en;
 ---
 
 <Base title={cv.name}>
-  <a href="#main">{t.skipLink}</a>
+  <a class="skip-link" href="#main">{t.skipLink}</a>
   <Header name={cv.name} role={cv.role} summary={cv.summary} />
   <main id="main">
     <Section id="about">
@@ -24,21 +24,21 @@ const t = ui.en;
     </Section>
 
     <Section id="experience">
-      <ol>
+      <ol class="entries">
         {cv.experience.map((item) => <ExperienceItem {...item} />)}
       </ol>
     </Section>
 
     <Section id="work">
-      <ul>
+      <ul class="entries">
         {
           cv.work.map(({ name, description, role, url }) => (
             <li>
-              <p>
+              <p class="title">
                 <a href={url}>{name}</a>
               </p>
               <p>{description}</p>
-              <p>{role}</p>
+              <p class="meta">{role}</p>
             </li>
           ))
         }
@@ -52,7 +52,7 @@ const t = ui.en;
             <>
               <dt>{name}</dt>
               <dd>
-                <ul>
+                <ul class="skills">
                   {items.map((item) => (
                     <li>{item}</li>
                   ))}
@@ -65,14 +65,14 @@ const t = ui.en;
     </Section>
 
     <Section id="education">
-      <ol>
+      <ol class="entries">
         {
           cv.education.map(({ title, institution, start, end }) => (
             <li>
               <p>
-                {title}, {institution}
+                <span class="title">{title}</span>, {institution}
               </p>
-              <p>
+              <p class="meta">
                 <DateRange start={start} end={end} />
               </p>
             </li>
@@ -97,7 +97,7 @@ const t = ui.en;
     <Section id="contact">
       <p>{cv.contact.intro}</p>
       <address>
-        <ul>
+        <ul class="contact">
           <li>
             <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a>
           </li>
@@ -111,3 +111,51 @@ const t = ui.en;
     </Section>
   </main>
 </Base>
+
+<style>
+  .skip-link {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: var(--gutter);
+    padding: var(--space-2xs) var(--space-xs);
+    background: var(--bg);
+    translate: 0 -100%;
+  }
+
+  .skip-link:focus {
+    translate: none;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd + dt {
+    margin-block-start: var(--space-s);
+  }
+
+  .skills {
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills li {
+    display: inline;
+  }
+
+  .skills li:not(:last-child)::after {
+    content: ", ";
+  }
+
+  address {
+    margin-block-start: var(--space-s);
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-m);
+    padding: 0;
+    list-style: none;
+  }
+</style>

@@ -1,0 +1,189 @@
+/*
+ * Fonts are split into Latin and Latin Extended-A so English and German pages
+ * never download the Extended-A files that only Polish needs. The Extended-A
+ * ranges skip U+0131 and U+0152-0153 because the Latin files already cover them.
+ */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-ext-a.woff2") format("woff2");
+  unicode-range: U+0100-0130, U+0132-0151, U+0154-017F;
+}
+
+/* Newsreader keeps its optical-size axis but only the regular weight. */
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-latin-ext-a.woff2") format("woff2");
+  unicode-range: U+0100-0130, U+0132-0151, U+0154-017F;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #fafaf7;
+  --text: #1a1a18;
+  --text-muted: #5f5e5a;
+  --rule: #e4e3dd;
+  --accent: #a8431c;
+
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
+
+  /* Fluid modular scale: ratio 1.2 on a 16px base at 320px wide, rising to
+     ratio 1.25 on an 18px base at 1440px wide. */
+  --step--1: clamp(0.8333rem, 0.8143rem + 0.0952vw, 0.9rem);
+  --step-0: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1411rem + 0.2946vw, 1.4062rem);
+  --step-2: clamp(1.44rem, 1.3492rem + 0.454vw, 1.7578rem);
+  --step-5: clamp(2.4883rem, 2.2183rem + 1.3499vw, 3.4332rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-body: 1.55;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+
+  --measure: 54ch;
+  --gutter: var(--space-s);
+
+  --hairline: 1px;
+  --focus-ring: 2px;
+  --underline: 0.0625em;
+  --underline-hover: 0.125em;
+  --underline-offset: 0.2em;
+  --transition: 150ms ease-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151514;
+    --text: #edede8;
+    --text-muted: #a3a29b;
+    --rule: #2c2c2a;
+    --accent: #f2a07f;
+  }
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* The body is the single text column. */
+body {
+  max-inline-size: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--gutter) var(--space-2xl);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: var(--underline);
+  text-underline-offset: var(--underline-offset);
+}
+
+a:hover {
+  text-decoration-thickness: var(--underline-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a {
+    transition: text-decoration-thickness var(--transition);
+  }
+}
+
+:focus-visible {
+  outline: var(--focus-ring) solid var(--accent);
+  outline-offset: var(--focus-ring);
+}
+
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Experience, selected work and education entries. */
+.entries {
+  list-style: none;
+  padding: 0;
+}
+
+.entries > li + li {
+  margin-block-start: var(--space-m);
+  padding-block-start: var(--space-m);
+  border-block-start: var(--hairline) solid var(--rule);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.meta {
+  margin-block-start: var(--space-3xs);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
