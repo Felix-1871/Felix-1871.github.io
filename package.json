@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node --disable-warning=ExperimentalWarning scripts/generate-pdf.ts",
     "preview": "astro preview",
     "format": "prettier --write ."
   },
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "playwright": "^1.63.0",
     "prettier": "^3.9.9",
     "typescript": "^6.0.3"
   }
