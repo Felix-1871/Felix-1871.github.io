@@ -1,10 +1,113 @@
 ---
+import { getEntry } from "astro:content";
 import Base from "../layouts/Base.astro";
+import DateRange from "../components/DateRange.astro";
+import ExperienceItem from "../components/ExperienceItem.astro";
+import Header from "../components/Header.astro";
+import Section from "../components/Section.astro";
+import { ui } from "../i18n/ui";
+
+const entry = await getEntry("cv", "en");
+if (!entry) {
+  throw new Error("No English CV found. Add src/content/cv/en.yaml.");
+}
+const cv = entry.data;
+const t = ui.en;
 ---
 
-<Base title="TODO: full name">
-  <main>
-    <h1>TODO: full name</h1>
-    <p>TODO: current role</p>
+<Base title={cv.name}>
+  <a href="#main">{t.skipLink}</a>
+  <Header name={cv.name} role={cv.role} summary={cv.summary} />
+  <main id="main">
+    <Section id="about">
+      <p>{cv.about}</p>
+    </Section>
+
+    <Section id="experience">
+      <ol>
+        {cv.experience.map((item) => <ExperienceItem {...item} />)}
+      </ol>
+    </Section>
+
+    <Section id="work">
+      <ul>
+        {
+          cv.work.map(({ name, description, role, url }) => (
+            <li>
+              <p>
+                <a href={url}>{name}</a>
+              </p>
+              <p>{description}</p>
+              <p>{role}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id="skills">
+      <dl>
+        {
+          cv.skills.map(({ name, items }) => (
+            <>
+              <dt>{name}</dt>
+              <dd>
+                <ul>
+                  {items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          ))
+        }
+      </dl>
+    </Section>
+
+    <Section id="education">
+      <ol>
+        {
+          cv.education.map(({ title, institution, start, end }) => (
+            <li>
+              <p>
+                {title}, {institution}
+              </p>
+              <p>
+                <DateRange start={start} end={end} />
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </Section>
+
+    <Section id="languages">
+      <dl>
+        {
+          cv.languages.map(({ name, level }) => (
+            <>
+              <dt>{name}</dt>
+              <dd>{level}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </Section>
+
+    <Section id="contact">
+      <p>{cv.contact.intro}</p>
+      <address>
+        <ul>
+          <li>
+            <a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a>
+          </li>
+          <li><a href={cv.contact.linkedin}>LinkedIn</a></li>
+          <li><a href={cv.contact.github}>GitHub</a></li>
+          <li>
+            <a href={cv.contact.business.url}>{cv.contact.business.name}</a>
+          </li>
+        </ul>
+      </address>
+    </Section>
   </main>
 </Base>

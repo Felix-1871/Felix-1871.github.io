@@ -1,0 +1,14 @@
+---
+import { ui } from "../i18n/ui";
+
+interface Props {
+  id: keyof typeof ui.en.sections;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id}>
+  <h2>{ui.en.sections[id]}</h2>
+  <slot />
+</section>

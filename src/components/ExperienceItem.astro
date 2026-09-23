@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from "astro:content";
+import DateRange from "./DateRange.astro";
+
+type Props = CollectionEntry<"cv">["data"]["experience"][number];
+
+const { title, organisation, location, start, end, achievements } = Astro.props;
+---
+
+<li>
+  <p>{title}, {organisation}</p>
+  <p><DateRange start={start} end={end} />, {location}</p>
+  <ul>
+    {achievements.map((achievement) => <li>{achievement}</li>)}
+  </ul>
+</li>
